@@ -30,13 +30,13 @@
           <a href="#" class="btn btn-cta">Caută o carte</a>
         </div>
         <img
-          src="../assets/img/book_lover.svg"
+          src="../assets/img/landing/book_lover.svg"
           alt="Person reading book Image"
         />
       </section>
       <section>
         <div id="left">
-          <img src="../assets/img/map.svg" alt="Map Image" />
+          <img src="../assets/img/landing/map.svg" alt="Map Image" />
           <h2>Distanțe minime</h2>
           <p>
             Căutăm persoane ce doresc să facă schimb în apropierea ta astfel
@@ -46,11 +46,11 @@
 
           <a href="#">
             Află mai multe
-            <img src="./../assets/img/arrow_right_red.svg" />
+            <img src="./../assets/img/landing/arrow_right_red.svg" />
           </a>
         </div>
         <div id="right">
-          <img src="../assets/img/checked.svg" alt="Checked Image" />
+          <img src="../assets/img/landing/checked.svg" alt="Checked Image" />
           <h2>Condiții excelente</h2>
           <p>
             Ne asigurăm că toate cărțile adăugate pe platforma noastră sunt în
@@ -60,7 +60,7 @@
 
           <a href="#">
             Află mai multe
-            <img src="../assets/img/arrow_right_red.svg" />
+            <img src="../assets/img/landing/arrow_right_red.svg" />
           </a>
         </div>
       </section>
@@ -75,9 +75,26 @@
           <a href="#" class="btn btn-cta">Caută o carte</a>
         </div>
 
-        <img src="../assets/img/bookcovers.png" />
+        <img src="../assets/img/landing/bookcovers.png" />
+      </section>
+      <section>
+        <img src="../assets/img/landing/bibliophile.svg" alt="" />
+        <div>
+          <h2>Te anunțăm când apar cărți noi</h2>
+          <p>
+            Abonează-te la newsletterul nostru și te vom anunța când apar cărți
+            noi pe placul tău în apropiere. Nu vei rata ocazia să obți cărțile
+            pe care ți le dorești.
+          </p>
+          <a href="#" class="btn btn-cta">Abonează-te</a>
+        </div>
       </section>
     </main>
+    <img src="../assets/img/landing/blobs/Vector1.svg" id="Vector1" />
+    <img src="../assets/img/landing/blobs/Vector2.svg" id="Vector2" />
+    <img src="../assets/img/landing/blobs/Vector3.svg" id="Vector3" />
+    <img src="../assets/img/landing/blobs/Vector4.svg" id="Vector4" />
+    <img src="../assets/img/landing/blobs/Vector5.svg" id="Vector5" />
   </div>
 </template>
 
@@ -104,14 +121,55 @@ body {
   overflow-x: hidden;
 }
 
+section:nth-child(4) {
+  display: flex;
+  margin-top: 130px;
+  align-items: center;
+  justify-content: space-around;
+  img {
+    flex: 0 0 50%;
+    position: relative;
+    right: 8%;
+  }
+
+  div {
+    flex: 0 0 50%;
+    h2 {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-bottom: 40px;
+      margin-top: 8px;
+
+      width: 80%;
+    }
+    a {
+      padding: 18px 35px 18px 35px;
+    }
+  }
+}
+
 section:nth-child(3) {
   display: flex;
-
   align-items: center;
   margin-top: 700px;
   div {
     margin-left: 140px;
     flex: 0 0 38%;
+    h2 {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-bottom: 40px;
+      margin-top: 8px;
+    }
+    a {
+      padding: 18px 35px 18px 35px;
+    }
   }
 
   img {
@@ -184,6 +242,7 @@ section:nth-child(2) {
     height: 650px;
     border-radius: 15px;
     box-shadow: 0px 3px 20px rgba(54, 64, 82, 0.18);
+    background: #fff;
   }
 }
 
@@ -254,5 +313,41 @@ header {
   .btn-cta {
     margin-left: 50px;
   }
+}
+
+#Vector1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+#Vector2 {
+  position: absolute;
+  top: 768px;
+  left: 0;
+  z-index: -1;
+}
+
+#Vector3 {
+  position: absolute;
+
+  left: 194.99px;
+  top: 863.27px;
+  z-index: -1;
+}
+
+#Vector4 {
+  position: absolute;
+
+  left: 50vw;
+  top: 1250px;
+  z-index: -1;
+}
+
+#Vector5 {
+  position: absolute;
+  left: 0px;
+  top: 2011px;
 }
 </style>
