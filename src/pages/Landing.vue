@@ -11,7 +11,7 @@
             <a href="#">Despre</a>
           </li>
           <li>
-            <a href="#" class="btn-cont">Cont</a>
+            <router-link to="/login" class="btn-cont">Cont</router-link>
           </li>
           <li>
             <a href="#" class="btn btn-cta">Începe</a>
@@ -98,7 +98,13 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+$black-text: rgba(34, 37, 41, 1);
+$gray-text: rgba(34, 37, 41, 0.8);
+//$red-main: #ff4f64;
+$red-main: #e23939;
+$blue-main: #3c70ff;
+
 h1 {
   font-weight: 300;
   font-size: 6.4rem;
@@ -115,10 +121,6 @@ p {
   color: rgba(0, 0, 0, 0.8);
   text-align: justify;
   line-height: 130%;
-}
-
-body {
-  overflow-x: hidden;
 }
 
 section:nth-child(4) {
@@ -268,10 +270,6 @@ section:first-child {
       width: 720px;
     }
   }
-}
-
-body {
-  font-size: 0.94vw;
 }
 
 .btn {

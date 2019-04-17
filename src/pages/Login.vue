@@ -3,6 +3,45 @@
     <main>
       <div id="left" @click="switchBetweenLoginAndRegister">
         <h1 class="title">Login</h1>
+        <div style="margin-bottom: 0px;">
+          <h2>Book Swap</h2>
+          <p>
+            Te ajutăm să schimbi cărțile vechi de care nu mai ai nevoie pentru
+            unele noi.
+          </p>
+        </div>
+        <div>
+          <span id="social_media_follow_label">Urmărește-ne pe:</span>
+          <ul id="social_media_follow">
+            <li>
+              <a href="#"
+                ><img
+                  src="../assets/img/login/social_media_follow_icon/twitter.svg"
+                  alt="Twitter"
+                />
+                <span>Twitter</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><img
+                  src="../assets/img/login/social_media_follow_icon/instagram.svg"
+                  alt="Instagram"
+                />
+                <span>Instagram</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><img
+                  src="../assets/img/login/social_media_follow_icon/facebook.svg"
+                  alt="Instagram"
+                />
+                <span>Facebook</span></a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
       <div id="right">
         <span class="title">Intră în cont</span>
@@ -30,7 +69,7 @@
           >
         </div>
         <hr />
-        <form action="" method="post">
+        <form action="api/v1/user/login" method="post">
           <label for="email">Introduceți emailul:</label>
           <input type="text" name="email" />
           <label for="password">Introduceți parola:</label>
@@ -49,6 +88,9 @@
             <input type="submit" value="Intră în cont" />
           </div>
         </form>
+        <span id="register-anchor"
+          >Nu ai cont? <a href="#">Înregistrează-te!</a></span
+        >
       </div>
     </main>
     <img src="../assets/img/login/blobs/Vector1.svg" id="Vector1" />
@@ -57,20 +99,97 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~pretty-checkbox/src/pretty-checkbox.scss";
 
+$black-text: rgba(34, 37, 41, 1);
+$gray-text: rgba(34, 37, 41, 0.8);
+//$red-main: #ff4f64;
+$red-main: #e23939;
+$blue-main: #3c70ff;
+
+#social_media_follow_label {
+  font-size: 1.6rem;
+}
+
+#social_media_follow {
+  list-style: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px;
+  margin: 7px 0 0 0;
+  img {
+    height: 1.4rem;
+    width: auto;
+    filter: invert(1);
+  }
+  a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 3px;
+    }
+  }
+}
+
+#register-anchor {
+  margin: 10px auto;
+  text-align: center;
+  display: block;
+  a {
+    text-decoration: none;
+    color: $blue-main;
+  }
+}
+
+#left {
+  color: white;
+  flex: 0 0 43.75%;
+  height: 100%;
+  border-radius: 15px 0px 0px 15px;
+  background: $blue-main;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h2 {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+  }
+  div {
+    margin: 30px;
+  }
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8rem;
+    text-align: justify;
+    line-height: 2.3rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
 form {
+  input[type="password"] {
+    margin-bottom: 18px !important;
+  }
   #submit {
-    margin: 30px 0 0 0;
+    margin: 31px 0 0 0;
     input[type="submit"] {
       width: 100%;
-      height: 60px;
+      height: 55px;
 
       background: #ff4f64;
       border-radius: 7px;
       color: white;
-      font-size: 1.6em;
+      font-size: 1.4em;
       border: 0;
 
       font-style: normal;
@@ -106,7 +225,7 @@ form {
     height: 30px;
     transition: border 500ms ease-out;
     margin-top: 3px;
-    margin-bottom: 37px;
+    margin-bottom: 35px;
     color: #000;
 
     font-size: 1.4em;
@@ -179,13 +298,6 @@ main {
   background: white;
 }
 
-#left {
-  flex: 0 0 43.75%;
-  height: 100%;
-  border-radius: 15px 0px 0px 15px;
-  background: $blue-main;
-}
-
 .container {
   display: flex;
   justify-content: center;
@@ -193,8 +305,8 @@ main {
   height: 100vh;
 }
 
-body {
-  font-size: 1.4em;
+.container {
+  font-size: 1.4rem;
 }
 
 #Vector1 {
