@@ -3,9 +3,24 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import FontLoader from "./components/FontLoader.vue";
+import VueAxios from "vue-axios";
+import axios from "axios";
 import("normalize.css");
 
 Vue.config.productionTip = false;
+Vue.use(VueAxios, axios);
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.AUTHENTICATED_STATUS) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
 
 new Vue({
   mixins: [FontLoader],

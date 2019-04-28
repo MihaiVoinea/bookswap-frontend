@@ -1,10 +1,14 @@
 <template>
   <div class="container">
     <main>
-      <div id="left" @click="switchBetweenLoginAndRegister">
-        <h1 class="title">Login</h1>
+      <div id="left">
+        <router-link to="/" class="title"
+          ><img src="../assets/img/login/left_arrow.svg" /><span
+            >Înapoi</span
+          ></router-link
+        >
         <div style="margin-bottom: 0px;">
-          <h2>Book Swap</h2>
+          <h1>BookSwap</h1>
           <p>
             Te ajutăm să schimbi cărțile vechi de care nu mai ai nevoie pentru
             unele noi.
@@ -44,6 +48,11 @@
         </div>
       </div>
       <div id="right">
+        <router-link to="/" class="title" style="display: none; color: black;"
+          ><img src="../assets/img/login/left_arrow.svg" /><span
+            >Înapoi</span
+          ></router-link
+        >
         <span class="title">Intră în cont</span>
         <div id="social_media_login">
           <a href="#">
@@ -52,7 +61,7 @@
             <span>Login cu Google</span></a
           >
           <div class="vr"></div>
-          <a href="#">
+          <a href="#" @click="authenticate('twitter')">
             <img
               src="../assets/img/login/twitter_icon.svg"
               alt="Twitter"
@@ -99,14 +108,8 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "~pretty-checkbox/src/pretty-checkbox.scss";
-
-$black-text: rgba(34, 37, 41, 1);
-$gray-text: rgba(34, 37, 41, 0.8);
-//$red-main: #ff4f64;
-$red-main: #e23939;
-$blue-main: #3c70ff;
+<style scoped lang="scss">
+@import "../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css";
 
 #social_media_follow_label {
   font-size: 1.6rem;
@@ -155,7 +158,7 @@ $blue-main: #3c70ff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  h2 {
+  h1 {
     font-style: normal;
     font-weight: 800;
     font-size: 2.4rem;
@@ -186,7 +189,7 @@ form {
       width: 100%;
       height: 55px;
 
-      background: #ff4f64;
+      background: $red-main;
       border-radius: 7px;
       color: white;
       font-size: 1.4em;
@@ -258,6 +261,7 @@ hr {
   a {
     text-decoration: none;
     text-align: center;
+    margin: 0px 2px;
     img {
       height: 60px;
       width: auto;
@@ -269,17 +273,24 @@ hr {
     }
   }
 }
-h1 {
-  color: rgba(255, 255, 255, 1);
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-}
 
 .title {
   margin: 20px 0px 0px 30px;
   font-size: 1.8rem;
   display: inline-block;
+}
+
+a.title {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  img {
+    height: 1.6rem;
+    width: auto;
+    margin-right: 5px;
+  }
 }
 
 main {
@@ -318,14 +329,82 @@ main {
 #Vector2 {
   position: absolute;
   left: 0px;
-  top: 106px;
+  top: 10vh;
   z-index: -1;
 }
 #Vector3 {
   position: absolute;
-  right: 200px;
+  right: 10vw;
   top: 0px;
   z-index: -1;
+}
+
+@media screen and (max-width: 1024px) {
+  main {
+    width: 73rem;
+  }
+}
+
+@media screen and (max-width: 768px), screen and (max-height: 600px) {
+  #left {
+    display: none;
+  }
+  main {
+    width: 45rem;
+  }
+  #right .title {
+    display: block !important;
+    img {
+      filter: invert(1);
+    }
+  }
+}
+
+@media screen and (max-height: 780px) {
+  #Vector1 {
+    width: 45vw;
+    height: auto;
+  }
+  #Vector2 {
+    width: auto;
+    height: 80vh;
+  }
+  #Vector3 {
+    width: 11vw;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 687px), screen and (max-height: 600px) {
+  #Vector1,
+  #Vector2,
+  #Vector3 {
+    display: none;
+  }
+  main {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  #right {
+    border-radius: 0;
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  #Vector1 {
+    width: 34.48vw;
+    height: 30.19vh;
+  }
+  #Vector2 {
+    width: 10.21vw;
+    height: 64.91vh;
+  }
+  #Vector3 {
+    width: 9.58vw;
+    height: 7.41vh;
+  }
 }
 </style>
 
@@ -335,8 +414,10 @@ import PrettyCheck from "pretty-checkbox-vue/check";
 export default {
   components: { PrettyCheck },
   methods: {
-    switchBetweenLoginAndRegister() {
-      console.log("switch");
+    authenticate: function(provider) {
+      console.log(provider);
+      window.location.replace(this.$store.getters.API_URI + "/auth/twitter");
+      // window.open("http://localhost:8081/api/v1/auth/twitter");
     }
   }
 };
