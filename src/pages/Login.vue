@@ -78,11 +78,11 @@
           >
         </div>
         <hr />
-        <form action="api/v1/user/login" method="post">
+        <form method="post" v-on:submit.prevent="submitLoginForm">
           <label for="email">Introduceți emailul:</label>
-          <input type="text" name="email" />
+          <input type="text" name="email" v-model="email" />
           <label for="password">Introduceți parola:</label>
-          <input type="password" name="password" />
+          <input type="password" name="password" v-model="password" />
           <PrettyCheck class="p-svg p-curve" color="primary">
             <!-- svg path -->
             <svg slot="extra" class="svg svg-icon" viewBox="0 0 20 20">
@@ -101,6 +101,8 @@
           >Nu ai cont? <a href="#">Înregistrează-te!</a></span
         >
       </div>
+
+      <notifications group="auth" />
     </main>
     <img src="../assets/img/login/blobs/Vector1.svg" id="Vector1" />
     <img src="../assets/img/login/blobs/Vector2.svg" id="Vector2" />
@@ -412,12 +414,46 @@ main {
 //import anime from "lib/anime.es.js";
 import PrettyCheck from "pretty-checkbox-vue/check";
 export default {
+  data: () => {
+    return {
+      email: "",
+      password: ""
+    };
+  },
   components: { PrettyCheck },
   methods: {
     authenticate: function(provider) {
       console.log(provider);
       window.location.replace(this.$store.getters.API_URI + "/auth/twitter");
       // window.open("http://localhost:8081/api/v1/auth/twitter");
+    },
+    submitLoginForm() {
+      this.axios({
+        method: "post",
+        url: "http://localhost:8081/api/v1/auth/local/signin",
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      })
+        .then(response => {
+          if (response.status === 200) {
+            this.$store.commit("SET_JWT", response.data.jwt);
+            this.$store.commit("SET_AUTHENTICATED_STATUS", true);
+            this.axios.defaults.headers.common["Authorization"] =
+              response.data.jwt;
+            this.$router.push("dashboard");
+          }
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.$notify({
+            group: "auth",
+            type: "error",
+            title: "Autentificarea a eșuat",
+            text: "Email sau parolă greșite!"
+          });
+        });
     }
   }
 };

@@ -5,10 +5,12 @@ import store from "./store";
 import FontLoader from "./components/FontLoader.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
+import Notifications from "vue-notification";
 import("normalize.css");
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
+Vue.use(Notifications);
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {

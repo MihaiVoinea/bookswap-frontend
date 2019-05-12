@@ -7,6 +7,11 @@
         <li><a href="#">Cărțile tale</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
+      <div>
+        {{
+          this.$store.state.name.first_name + this.$store.state.name.last_name
+        }}
+      </div>
     </div>
   </nav>
 </template>

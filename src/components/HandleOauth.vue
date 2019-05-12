@@ -7,7 +7,6 @@ export default {
       if (response.data.jwt) {
         this.$store.commit("SET_JWT", response.data.jwt);
         this.$store.commit("SET_AUTHENTICATED_STATUS", true);
-        this.$store.commit("SET_ID", response.data._id);
         this.axios.defaults.headers.common["Authorization"] = response.data.jwt;
         this.$store.dispatch("loadUser");
         this.axios(this.$store.getters.API_URI + "/user").then(response => {
