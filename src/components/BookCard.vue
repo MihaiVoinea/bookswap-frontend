@@ -2,12 +2,16 @@
   <div class="card">
     <div class="cover">
       <a href="#">
-        <img src="../assets/img/book_placeholder.png" alt="" />
+        <img :src="book.coverUrl" alt="" />
       </a>
     </div>
     <div id="bookinformation-group">
-      <div class="title"><a href="#">Puterea prezentului</a></div>
-      <div class="author"><a href="#">Eckhart Tolle</a></div>
+      <div class="title">
+        <a href="#">{{ book.title }}</a>
+      </div>
+      <div class="author">
+        <a href="#">{{ book.author }}</a>
+      </div>
     </div>
     <div class="distance">La 2.5km distanță de tine</div>
   </div>
@@ -29,6 +33,7 @@
   word-wrap: break-word;
   overflow: hidden;
   max-height: 44px;
+  margin: 0 5px;
   a {
     color: black;
     text-decoration: none;
@@ -60,18 +65,20 @@
   flex-direction: column;
   justify-content: space-between;
   width: 250px;
-  height: 290px;
+  height: 300px;
   background: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   text-align: center;
+  margin: 10px 5px;
   .cover {
     width: 150px;
     height: 190px;
     margin: 0px auto;
     padding-top: 10px;
     img {
-      height: 100%;
+      max-height: 190px;
+      max-width: 150px;
       width: auto;
       margin: 0 auto;
       display: block;
@@ -79,3 +86,9 @@
   }
 }
 </style>
+
+<script>
+export default {
+  props: ["book"]
+};
+</script>

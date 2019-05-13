@@ -96,6 +96,11 @@
         </div>
       </section>
     </main>
+    <img src="../assets/img/landing/blobs/Vector1.svg" id="Vector1" />
+    <img src="../assets/img/landing/blobs/Vector2.svg" id="Vector2" />
+    <img src="../assets/img/landing/blobs/Vector3.svg" id="Vector3" />
+    <img src="../assets/img/landing/blobs/Vector4.svg" id="Vector4" />
+    <img src="../assets/img/landing/blobs/Vector5.svg" id="Vector5" />
   </div>
 </template>
 
@@ -157,7 +162,7 @@ section:nth-child(3) {
     height: 70rem;
     margin: 0 30px;
     text-align: justify;
-
+    background: white;
     a {
       margin: 40px 40px 85px 40px;
       color: $red-main;
@@ -340,6 +345,46 @@ h1 {
   }
 }
 @media screen and (max-width: 1439px) {
+}
+
+#Vector1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+#Vector2 {
+  position: absolute;
+  top: 768px;
+  left: 0;
+  z-index: -1;
+}
+
+#Vector3 {
+  position: absolute;
+
+  width: 43rem;
+  height: auto;
+  left: 14.5rem;
+  top: 863.27px;
+  z-index: -1;
+}
+
+#Vector4 {
+  position: absolute;
+
+  right: 0;
+  top: 1250px;
+  z-index: -1;
+}
+
+#Vector5 {
+  position: absolute;
+  left: 0px;
+  top: 2011px;
+
+  z-index: -1;
 }
 </style>
 
