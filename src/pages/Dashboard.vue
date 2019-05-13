@@ -1,7 +1,9 @@
 <template>
   <div class="dashboard-app">
     <Navigation />
-    <main></main>
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 

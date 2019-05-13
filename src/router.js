@@ -23,7 +23,15 @@ export default new Router({
       component: () => import("./pages/Dashboard.vue"),
       meta: {
         requiresAuth: true
-      }
+      },
+      children: [
+        {
+          // UserProfile will be rendered inside User's <router-view>
+          // when /user/:id/profile is matched
+          path: "latest",
+          component: () => import("./components/Latest.vue")
+        }
+      ]
     },
     {
       path: "/auth/oauth-callback",
