@@ -22,9 +22,8 @@
 export default {
   mounted() {
     if (this.$store.getters.JWT !== undefined)
-      this.axios.defaults.headers.common[
-        "Authorization"
-      ] = this.$store.getters.JWT;
+      this.axios.defaults.headers.common["Authorization"] =
+        "Bearer " + this.$store.getters.JWT;
   }
 };
 </script>
