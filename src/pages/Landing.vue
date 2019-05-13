@@ -111,6 +111,7 @@ section:nth-child(5) {
     flex: 0 0 50%;
     position: relative;
     right: 50%;
+    height: 864px;
   }
   div {
     flex: 0 0 50%;
@@ -133,6 +134,7 @@ section:nth-child(4) {
   margin: 37.04vh 0 0 0;
   img {
     flex: 0 0 50%;
+    height: 849px;
   }
   div {
     flex: 0 0 50%;
@@ -217,6 +219,7 @@ section:nth-child(2) {
   img {
     position: relative;
     left: 100px;
+    height: 599px;
   }
 }
 
