@@ -14,10 +14,8 @@ export default new Vuex.Store({
     id: undefined,
     isAuthenticated: false,
     jwt: undefined,
-    name: {
-      first_name: undefined,
-      last_name: undefined
-    }
+    displayName: undefined,
+    fullName: undefined
   },
   mutations: {
     SET_JWT: (state, newJwt) => {
@@ -28,6 +26,12 @@ export default new Vuex.Store({
     },
     SET_AUTHENTICATED_STATUS: (state, status) => {
       state.isAuthenticated = status;
+    },
+    SET_DISPLAY_NAME: (state, status) => {
+      state.displayName = status;
+    },
+    SET_FULL_NAME: (state, status) => {
+      state.fullName = status;
     }
   },
   getters: {
@@ -44,6 +48,21 @@ export default new Vuex.Store({
       return state.id;
     }
   },
-  actions: {},
+  actions: {
+    loadUser(context) {
+      Vue.axios({
+        method: "get",
+        url: "http://localhost:8081/api/v1/user"
+      })
+        .then(response => {
+          console.log(response);
+          context.commit("SET_DISPLAY_NAME", response.data.displayName);
+        })
+        .catch(error => {
+          console.log(error.response);
+          return error;
+        });
+    }
+  },
   plugins: [vuexLocal.plugin]
 });

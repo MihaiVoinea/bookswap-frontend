@@ -7,16 +7,58 @@
         <li><a href="#">Cărțile tale</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
-      <div>
-        {{
-          this.$store.state.name.first_name + this.$store.state.name.last_name
-        }}
+      <div class="navigation-right-content">
+        <a href="#" id="dropdown-toggle">
+          {{ this.$store.state.displayName }}
+          <img src="../assets/img/navigation/expand-button.svg" alt="Expand" />
+        </a>
+        <transition name="fade">
+          <ul v-if="isDropdownOpen" class="nav-dropdown">
+            <li><a href="#">Setări</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </transition>
       </div>
     </div>
   </nav>
 </template>
 
 <style lang="scss" scoped>
+.nav-dropdown {
+  display: block;
+  position: absolute;
+  top: 1.5em;
+  right: 0px;
+  background: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  & > li {
+    a {
+      padding: 20px;
+      display: block;
+      margin: 0;
+    }
+  }
+  & > li:hover {
+    background: #f9f9f9;
+  }
+}
+.navigation-right-content {
+  position: absolute;
+  right: 20px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  img {
+    width: 1rem;
+    position: relative;
+    bottom: 1px;
+    margin: 0 2px;
+  }
+}
 nav {
   width: 100%;
   height: 5.5rem;
@@ -24,7 +66,7 @@ nav {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   position: fixed;
   display: flex;
-  div {
+  & > div {
     font-size: 1.8rem;
     display: flex;
     justify-content: space-around;
@@ -49,4 +91,29 @@ nav {
     }
   }
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
 </style>
+
+<script>
+export default {
+  data: () => {
+    return {
+      isDropdownOpen: false
+    };
+  },
+  mounted() {
+    window.addEventListener(
+      "click",
+      e => {
+        if (e.target.id === "dropdown-toggle" && this.isDropdownOpen === false)
+          this.isDropdownOpen = true;
+        else this.isDropdownOpen = false;
+      },
+      false
+    );
+  }
+};
+</script>

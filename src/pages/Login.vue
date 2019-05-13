@@ -199,6 +199,7 @@ form {
 
       font-style: normal;
       font-weight: 300;
+      cursor: pointer;
     }
   }
 
@@ -441,8 +442,9 @@ export default {
             this.$store.commit("SET_JWT", response.data.jwt);
             this.$store.commit("SET_AUTHENTICATED_STATUS", true);
             this.axios.defaults.headers.common["Authorization"] =
-              response.data.jwt;
+              "Bearer " + response.data.jwt;
             this.$router.push("dashboard");
+            this.$store.dispatch("loadUser");
           }
         })
         .catch(error => {
