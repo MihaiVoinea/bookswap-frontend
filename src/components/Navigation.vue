@@ -3,7 +3,7 @@
     <div>
       <img src="../assets/img/icon.svg" alt="BookSwap" />
       <ul>
-        <li><a href="#">Explorează</a></li>
+        <li><router-link to="/dashboard/latest">Explorează</router-link></li>
         <li><a href="#">Cărțile tale</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
@@ -14,7 +14,7 @@
         </a>
         <transition name="fade">
           <ul v-if="isDropdownOpen" class="nav-dropdown">
-            <li><a href="#">Setări</a></li>
+            <li><router-link to="/dashboard/settings">Setări</router-link></li>
             <li><a href="#">Logout</a></li>
           </ul>
         </transition>

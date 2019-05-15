@@ -20,7 +20,7 @@ export default new Router({
     {
       path: "/dashboard",
       name: "Dashboard",
-      component: () => import("./pages/Dashboard.vue"),
+      component: () => import("./components/Dashboard.vue"),
       meta: {
         requiresAuth: true
       },
@@ -29,7 +29,13 @@ export default new Router({
           // UserProfile will be rendered inside User's <router-view>
           // when /user/:id/profile is matched
           path: "latest",
-          component: () => import("./components/Latest.vue")
+          component: () => import("./pages/Latest.vue")
+        },
+        {
+          // UserProfile will be rendered inside User's <router-view>
+          // when /user/:id/profile is matched
+          path: "Settings",
+          component: () => import("./pages/Settings.vue")
         }
       ]
     },

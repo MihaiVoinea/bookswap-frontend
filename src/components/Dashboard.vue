@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-app">
+  <div class="bookswap-app">
     <Navigation />
     <main>
       <router-view></router-view>
@@ -8,7 +8,10 @@
 </template>
 
 <style lang="scss" scoped>
-div.dashboard-app {
+.container {
+  margin: 20px 300px;
+}
+div.bookswap-app {
   background-color: #f4f6fb;
   height: 100vh;
   width: 100%;

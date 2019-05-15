@@ -8,9 +8,6 @@
 </template>
 
 <style lang="scss" scoped>
-.container {
-  margin: 20px 300px;
-}
 h1 {
   font-family: "Open Sans";
   font-style: normal;
@@ -29,7 +26,7 @@ ul {
 </style>
 
 <script>
-import Book from "./BookCard.vue";
+import Book from "../components/BookCard.vue";
 export default {
   components: {
     Book
