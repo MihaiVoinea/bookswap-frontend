@@ -8,15 +8,15 @@
       <hr />
 
       <div class="input-wrap">
-        <label for="first_name">Prenume</label>
+        <label for="first_name">Prenume:</label>
         <input type="text" name="first_name" v-model="firstName" />
       </div>
       <div class="input-wrap">
-        <label for="last_name">Nume</label>
+        <label for="last_name">Nume:</label>
         <input type="text" name="last_name" v-model="lastName" />
       </div>
       <div class="input-wrap">
-        <label for="region">Județ</label>
+        <label for="region">Județ:</label>
 
         <select id="region" @change="handleRegionChange">
           <option
@@ -29,7 +29,7 @@
         </select>
       </div>
       <div class="input-wrap">
-        <label for="city">Localitate</label>
+        <label for="city">Localitate:</label>
         <select id="city" @change="handleCityChange">
           <option
             v-for="(city, index) in cities"

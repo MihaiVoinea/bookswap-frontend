@@ -4,7 +4,7 @@
       <img src="../assets/img/icon.svg" alt="BookSwap" />
       <ul>
         <li><router-link to="/dashboard/latest">Explorează</router-link></li>
-        <li><a href="#">Cărțile tale</a></li>
+        <li><router-link to="/dashboard/mybooks">Cărțile tale</router-link></li>
         <li><a href="#">Blog</a></li>
       </ul>
       <div class="navigation-right-content">

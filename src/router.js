@@ -26,16 +26,20 @@ export default new Router({
       },
       children: [
         {
-          // UserProfile will be rendered inside User's <router-view>
-          // when /user/:id/profile is matched
           path: "latest",
           component: () => import("./pages/Latest.vue")
         },
         {
-          // UserProfile will be rendered inside User's <router-view>
-          // when /user/:id/profile is matched
-          path: "Settings",
+          path: "settings",
           component: () => import("./pages/Settings.vue")
+        },
+        {
+          path: "mybooks",
+          component: () => import("./pages/MyBooks.vue")
+        },
+        {
+          path: "addbook",
+          component: () => import("./pages/AddBook.vue")
         }
       ]
     },
