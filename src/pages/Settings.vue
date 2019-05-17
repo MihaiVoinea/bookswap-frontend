@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1>Setări:</h1>
     <form>
       <div>
         <h2>Contul tău</h2>
@@ -10,25 +9,58 @@
 
       <div class="input-wrap">
         <label for="first_name">Prenume</label>
-        <input type="text" name="first_name" />
+        <input type="text" name="first_name" v-model="firstName" />
       </div>
       <div class="input-wrap">
         <label for="last_name">Nume</label>
-        <input type="text" name="last_name" />
+        <input type="text" name="last_name" v-model="lastName" />
       </div>
       <div class="input-wrap">
         <label for="region">Județ</label>
-        <input type="text" name="region" />
+
+        <select id="region" @change="handleRegionChange">
+          <option
+            v-for="(region, index) in regions"
+            :key="index"
+            :value="region"
+            :selected="region === selectedRegion"
+            >{{ region }}</option
+          >
+        </select>
       </div>
       <div class="input-wrap">
         <label for="city">Localitate</label>
-        <input type="text" name="city" />
+        <select id="city" @change="handleCityChange">
+          <option
+            v-for="(city, index) in cities"
+            :key="index"
+            :value="city"
+            :selected="city === selectedCity"
+            >{{ city }}</option
+          >
+        </select>
       </div>
+      <input type="submit" value="Salvează" @click="handleSaveUser" />
     </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
+input[type="submit"] {
+  width: 20%;
+  padding: 13px 35px;
+  background: $blue-main;
+  border-radius: 100px;
+  border: 0;
+  color: white;
+  display: block;
+  margin: 10px auto 20px auto;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: #2d60ed;
+  }
+}
 h1 {
   font-family: "Open Sans";
   font-style: normal;
@@ -59,18 +91,19 @@ form {
   width: 50%;
   display: flex;
   flex-direction: column;
-  min-height: 30em;
   background: white;
   box-shadow: 0px 3px 7px rgba(54, 64, 82, 0.25);
   border-radius: 7px;
-  margin: 0 auto;
+  margin: 3em auto;
   & > * {
     margin: 5px 20px;
   }
   .input-wrap {
     display: flex;
     flex-direction: column;
-    input {
+    input,
+    select {
+      padding: 0 10px;
       background-color: #fff;
       border: 1px solid #dbdbdb;
       color: #363636;
@@ -78,7 +111,7 @@ form {
 
       line-height: 1.5;
       border-radius: 3px;
-      height: 1.75em;
+      height: 2em;
     }
     label {
       font-weight: bold;
@@ -89,5 +122,80 @@ form {
 </style>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      firstName: this.$store.getters.DISPLAY_NAME,
+      lastName: "",
+      regions: [],
+      selectedRegion: this.$store.getters.REGION,
+      cities: [],
+      selectedCity: this.$store.getters.LOCATION
+    };
+  },
+  mounted() {
+    const names = this.$store.getters.FULL_NAME.split(" ");
+    if (names.length >= 2) {
+      this.lastName = names[1];
+    }
+
+    this.axios({
+      method: "GET",
+      url: this.$store.state.apiUri + "/region"
+    })
+      .then(response => {
+        this.regions = response.data;
+        this.updateCities(this.selectedRegion);
+      })
+      .catch(error => console.log(error));
+  },
+  methods: {
+    updateCities(region) {
+      this.axios({
+        method: "GET",
+        url: this.$store.state.apiUri + "/region/" + region
+      })
+        .then(response => {
+          this.cities = response.data;
+        })
+        .catch(error => console.log(error));
+    },
+    countSpaceCharacters(text) {
+      return text.match(/([\s]+)/g).length;
+    },
+    handleSaveUser(event) {
+      event.preventDefault();
+      if (
+        `${this.firstName} ${this.lastName}` !==
+          this.$store.getters.FULL_NAME ||
+        this.firstName !== this.$store.getters.DISPLAY_NAME ||
+        this.selectedRegion !== this.$store.getters.REGION ||
+        this.selectedCity !== this.$store.getters.LOCATION
+      ) {
+        this.axios({
+          method: "PUT",
+          url: this.$store.state.apiUri + "/user",
+          data: {
+            displayName: this.firstName,
+            fullName: this.firstName + " " + this.lastName,
+            region: this.selectedRegion,
+            location: this.selectedCity
+          }
+        })
+          .then(() => {
+            this.$store.dispatch("loadUser");
+          })
+          .catch(error => console.log(error));
+      }
+    },
+    handleRegionChange(event) {
+      this.selectedRegion = event.target.value;
+      this.cities = [];
+      this.updateCities(this.selectedRegion);
+    },
+    handleCityChange(event) {
+      this.selectedCity = event.target.value;
+    }
+  }
+};
 </script>

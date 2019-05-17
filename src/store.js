@@ -15,7 +15,9 @@ export default new Vuex.Store({
     isAuthenticated: false,
     jwt: undefined,
     displayName: undefined,
-    fullName: undefined
+    fullName: undefined,
+    region: undefined,
+    location: undefined
   },
   mutations: {
     SET_JWT: (state, newJwt) => {
@@ -32,9 +34,21 @@ export default new Vuex.Store({
     },
     SET_FULL_NAME: (state, status) => {
       state.fullName = status;
+    },
+    SET_REGION: (state, status) => {
+      state.region = status;
+    },
+    SET_LOCATION: (state, status) => {
+      state.location = status;
     }
   },
   getters: {
+    FULL_NAME: state => {
+      return state.fullName;
+    },
+    DISPLAY_NAME: state => {
+      return state.displayName;
+    },
     JWT: state => {
       return state.jwt;
     },
@@ -46,17 +60,25 @@ export default new Vuex.Store({
     },
     ID: state => {
       return state.id;
+    },
+    REGION: state => {
+      return state.region;
+    },
+    LOCATION: state => {
+      return state.location;
     }
   },
   actions: {
     loadUser(context) {
       Vue.axios({
         method: "get",
-        url: "http://localhost:8081/api/v1/user"
+        url: context.state.apiUri + "/user"
       })
         .then(response => {
-          console.log(response);
           context.commit("SET_DISPLAY_NAME", response.data.displayName);
+          context.commit("SET_FULL_NAME", response.data.fullName);
+          context.commit("SET_REGION", response.data.region);
+          context.commit("SET_LOCATION", response.data.location);
         })
         .catch(error => {
           console.log(error.response);

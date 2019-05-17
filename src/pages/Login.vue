@@ -425,13 +425,13 @@ export default {
   methods: {
     authenticate: function(provider) {
       console.log(provider);
-      window.location.replace(this.$store.getters.API_URI + "/auth/twitter");
+      window.location.replace(this.$store.state.apiUri + "/auth/twitter");
       // window.open("http://localhost:8081/api/v1/auth/twitter");
     },
     submitLoginForm() {
       this.axios({
         method: "post",
-        url: "http://localhost:8081/api/v1/auth/local/signin",
+        url: this.$store.state.apiUri + "/auth/local/signin",
         data: {
           email: this.email,
           password: this.password
