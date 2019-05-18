@@ -8,14 +8,23 @@
         <li><a href="#">Blog</a></li>
       </ul>
       <div class="navigation-right-content">
+        <img
+          class="profile-picture"
+          :src="this.$store.state.photoUrl"
+          :alt="this.$store.state.displayName"
+        />
         <a href="#" id="dropdown-toggle">
           {{ this.$store.state.displayName }}
-          <img src="../assets/img/navigation/expand-button.svg" alt="Expand" />
+          <img
+            src="../assets/img/navigation/expand-button.svg"
+            alt="Expand"
+            id="expand"
+          />
         </a>
         <transition name="fade">
           <ul v-if="isDropdownOpen" class="nav-dropdown">
             <li><router-link to="/dashboard/settings">Setări</router-link></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="#" @click="handleLogout">Logout</a></li>
           </ul>
         </transition>
       </div>
@@ -24,6 +33,10 @@
 </template>
 
 <style lang="scss" scoped>
+.profile-picture {
+  width: 2em;
+  height: auto;
+}
 .nav-dropdown {
   display: block;
   position: absolute;
@@ -45,6 +58,8 @@
   }
 }
 .navigation-right-content {
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 20px;
   a {
@@ -52,7 +67,7 @@
     color: black;
   }
 
-  img {
+  #expand {
     width: 1rem;
     position: relative;
     bottom: 1px;
@@ -114,6 +129,14 @@ export default {
       },
       false
     );
+  },
+  methods: {
+    handleLogout() {
+      this.$store.dispatch("logout").then(() => {
+        window.localStorage.clear();
+        this.$router.push("/login");
+      });
+    }
   }
 };
 </script>

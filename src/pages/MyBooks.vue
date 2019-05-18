@@ -71,9 +71,8 @@ export default {
     };
   },
   mounted() {
-    this.axios("http://localhost:8081/api/v1/book/me")
+    this.axios(this.$store.state.apiUri + "/book/me")
       .then(response => {
-        console.log(response);
         this.books = response.data;
       })
       .catch(error => console.log(error));

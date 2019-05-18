@@ -10,12 +10,26 @@ export default new Router({
     {
       path: "/",
       name: "Landing",
-      component: () => import("./pages/Landing.vue")
+      component: () => import("./pages/Landing.vue"),
+      meta: {
+        guest: true
+      }
     },
     {
       path: "/login",
       name: "Login",
-      component: () => import("./pages/Login.vue")
+      component: () => import("./pages/Login.vue"),
+      meta: {
+        guest: true
+      }
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: () => import("./pages/Register.vue"),
+      meta: {
+        guest: true
+      }
     },
     {
       path: "/dashboard",
@@ -44,6 +58,10 @@ export default new Router({
         {
           path: "manualaddbook",
           component: () => import("./pages/ManualAddBook.vue")
+        },
+        {
+          path: "viewbook/:id",
+          component: () => import("./pages/ViewBook.vue")
         }
       ]
     },

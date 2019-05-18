@@ -17,7 +17,8 @@ export default new Vuex.Store({
     displayName: undefined,
     fullName: undefined,
     region: undefined,
-    location: undefined
+    location: undefined,
+    photoUrl: undefined
   },
   mutations: {
     SET_JWT: (state, newJwt) => {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     SET_LOCATION: (state, status) => {
       state.location = status;
+    },
+    SET_PHOTO_URL: (state, status) => {
+      state.photoUrl = status;
     }
   },
   getters: {
@@ -79,11 +83,22 @@ export default new Vuex.Store({
           context.commit("SET_FULL_NAME", response.data.fullName);
           context.commit("SET_REGION", response.data.region);
           context.commit("SET_LOCATION", response.data.location);
+          context.commit("SET_PHOTO_URL", response.data.photoUrl);
         })
         .catch(error => {
           console.log(error.response);
           return error;
         });
+    },
+    logout(context) {
+      context.commit("SET_AUTHENTICATED_STATUS", false);
+      context.commit("SET_DISPLAY_NAME", undefined);
+      context.commit("SET_FULL_NAME", undefined);
+      context.commit("SET_REGION", undefined);
+      context.commit("SET_LOCATION", undefined);
+      context.commit("SET_JWT", undefined);
+      context.commit("SET_ID", undefined);
+      context.commit("SET_PHOTO_URL", undefined);
     }
   },
   plugins: [vuexLocal.plugin]

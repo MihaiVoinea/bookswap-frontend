@@ -11,6 +11,10 @@
 .container {
   margin: 20px 300px;
 }
+main {
+  background-color: #f4f6fb;
+  padding-bottom: 50px;
+}
 div.bookswap-app {
   background-color: #f4f6fb;
   height: 100vh;

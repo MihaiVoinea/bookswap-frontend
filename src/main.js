@@ -19,9 +19,13 @@ router.beforeEach((to, from, next) => {
       return;
     }
     next("/login");
-  } else {
-    next();
-  }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (!store.getters.AUTHENTICATED_STATUS) {
+      next();
+      return;
+    }
+    next("/dashboard/latest");
+  } else next();
 });
 
 new Vue({

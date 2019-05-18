@@ -83,8 +83,7 @@
           <input type="text" name="email" v-model="email" />
           <label for="password">Introduceți parola:</label>
           <input type="password" name="password" v-model="password" />
-          <PrettyCheck class="p-svg p-curve" color="primary">
-            <!-- svg path -->
+          <!-- <PrettyCheck class="p-svg p-curve" color="primary">
             <svg slot="extra" class="svg svg-icon" viewBox="0 0 20 20">
               <path
                 d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
@@ -92,13 +91,14 @@
               ></path>
             </svg>
             Ține-mă minte
-          </PrettyCheck>
+          </PrettyCheck> -->
           <div id="submit">
             <input type="submit" value="Intră în cont" />
           </div>
         </form>
         <span id="register-anchor"
-          >Nu ai cont? <a href="#">Înregistrează-te!</a></span
+          >Nu ai cont?
+          <router-link to="/register">Înregistrează-te!</router-link></span
         >
       </div>
 
@@ -111,8 +111,6 @@
 </template>
 
 <style scoped lang="scss">
-@import "../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css";
-
 #social_media_follow_label {
   font-size: 1.6rem;
 }
@@ -183,10 +181,10 @@
 }
 form {
   input[type="password"] {
-    margin-bottom: 18px !important;
+    margin-bottom: 40px !important;
   }
   #submit {
-    margin: 31px 0 0 0;
+    margin: 25px 0 0 0;
     input[type="submit"] {
       width: 100%;
       height: 55px;
@@ -413,7 +411,6 @@ main {
 
 <script>
 //import anime from "lib/anime.es.js";
-import PrettyCheck from "pretty-checkbox-vue/check";
 export default {
   data: () => {
     return {
@@ -421,12 +418,10 @@ export default {
       password: ""
     };
   },
-  components: { PrettyCheck },
   methods: {
     authenticate: function(provider) {
       console.log(provider);
       window.location.replace(this.$store.state.apiUri + "/auth/twitter");
-      // window.open("http://localhost:8081/api/v1/auth/twitter");
     },
     submitLoginForm() {
       this.axios({
@@ -443,7 +438,7 @@ export default {
             this.$store.commit("SET_AUTHENTICATED_STATUS", true);
             this.axios.defaults.headers.common["Authorization"] =
               "Bearer " + response.data.jwt;
-            this.$router.push("dashboard");
+            this.$router.push("/dashboard/latest");
             this.$store.dispatch("loadUser");
           }
         })

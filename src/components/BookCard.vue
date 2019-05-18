@@ -1,19 +1,27 @@
 <template>
   <div class="card">
     <div class="cover">
-      <a href="#">
+      <a :href="`./viewbook/${this.book._id}`" @click="showPageViewBook">
         <img :src="book.coverUrl" alt="" />
       </a>
     </div>
     <div id="bookinformation-group">
-      <div class="title">
-        <a href="#">{{ book.title }}</a>
+      <div class="title" @click="showPageViewBook">
+        <a :href="`./viewbook/${this.book._id}`">{{ book.title }}</a>
       </div>
       <div class="author">
-        <a href="#">{{ book.author }}</a>
+        <!-- <a href="#"> -->
+        {{ book.author }}
+        <!-- </a> -->
       </div>
     </div>
-    <div class="distance">La 2.5km distanță de tine</div>
+    <div class="distance">
+      {{
+        distance === 0
+          ? "Carte adăugată de tine"
+          : `La ${Math.round(distance)}km distanță de tine`
+      }}
+    </div>
   </div>
 </template>
 
@@ -90,6 +98,25 @@
 
 <script>
 export default {
-  props: ["book"]
+  props: ["book"],
+  data() {
+    return {
+      distance: 0
+    };
+  },
+  mounted() {
+    this.axios
+      .get(this.$store.state.apiUri + "/user/distance/" + this.book.addedBy)
+      .then(distanceResponse => {
+        this.distance = distanceResponse.data.distance;
+      })
+      .catch(error => console.log(error));
+  },
+  methods: {
+    showPageViewBook(event) {
+      event.preventDefault();
+      this.$router.push("/dashboard/viewbook/" + this.book._id);
+    }
+  }
 };
 </script>
