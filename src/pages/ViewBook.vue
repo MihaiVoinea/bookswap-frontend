@@ -65,6 +65,7 @@ hr {
 .book-cover {
   width: 20%;
   height: 20%;
+  min-width: 180px;
   margin: 20px;
 }
 .author {
