@@ -79,6 +79,7 @@
     img {
       max-height: 190px;
       max-width: 150px;
+      min-height: 190px;
       width: auto;
       margin: 0 auto;
       display: block;

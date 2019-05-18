@@ -39,7 +39,11 @@ export default new Router({
         },
         {
           path: "addbook",
-          component: () => import("./pages/AddBook.vue")
+          component: () => import("./pages/GoodreadsAddBook.vue")
+        },
+        {
+          path: "manualaddbook",
+          component: () => import("./pages/ManualAddBook.vue")
         }
       ]
     },
