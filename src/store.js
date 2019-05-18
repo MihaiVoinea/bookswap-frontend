@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    apiUri: "http://localhost:8081/api/v1",
+    apiUri: "https://bookswap.ro/api/v1",
     id: undefined,
     isAuthenticated: false,
     jwt: undefined,
