@@ -9,7 +9,7 @@
           <li><a href="#">Explorează</a></li>
           <li><a href="#">Despre</a></li>
           <li><router-link to="/login">Cont</router-link></li>
-          <li><a href="#" class="btn-cta">Începe</a></li>
+          <li><router-link to="/register" class="btn-cta">Începe</router-link></li>
         </ul>
       </nav>
       <section>
@@ -19,7 +19,7 @@
             BookSwap este o platforma online unde poți schimba cărțile de care
             nu mai ai nevoie pentru unele noi.
           </p>
-          <a href="#" class="btn btn-cta">Caută o carte</a>
+          <router-link to="/register" class="btn btn-cta">Caută o carte</router-link>
         </div>
         <img src="../assets/img/landing/book_lover.svg" alt="Book Lover" />
       </section>
