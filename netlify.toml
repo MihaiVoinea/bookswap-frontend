@@ -6,5 +6,5 @@
   
 [[redirects]]
   from = "/api/*"
-  to = "https://api.bookswap.ro/:splat"
+  to = "https://api.bookswap.ro/api/:splat"
   status = 200
